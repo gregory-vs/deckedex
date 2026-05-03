@@ -5,7 +5,6 @@
 This agent is responsible for building and maintaining a web application for managing Pokémon TCG decks.
 
 The system allows users to:
-
 - Register and authenticate
 - Search Pokémon cards using an external API
 - Create and manage decks
@@ -14,13 +13,12 @@ The system allows users to:
 - Filter and visualize deck compositions
 
 Architecture:
-
 - Backend: Laravel (REST API + business logic)
 - Frontend: Next.js (React framework)
 - UI Library: Material UI (MUI)
+- Database: MySQL (managed via Laravel migrations and seeders)
 
 External dependency:
-
 - Pokémon TCG API (see pokemon_api.md)
 
 ---
@@ -40,13 +38,13 @@ The agent must implement an MVP that enables:
 ## 3. Tech Stack
 
 ### Backend
-
 - Laravel (REST API)
-- MySQL or PostgreSQL
+- MySQL (mandatory)
+- Laravel Migrations (schema management)
+- Laravel Seeders (initial and test data)
 - Cache (optional, recommended)
 
 ### Frontend
-
 - Next.js (App Router)
 - React
 - Material UI (MUI)
@@ -57,12 +55,12 @@ The agent must implement an MVP that enables:
 ## 4. High-Level Architecture
 
 [ Next.js Frontend ]
-↓
+        ↓
 [ Laravel API ]
-↓
+        ↓
 [ Pokémon TCG API ]
-↓
-[ Database ]
+        ↓
+[ MySQL Database ]
 
 ---
 
@@ -72,7 +70,7 @@ The agent must implement an MVP that enables:
 
 - User registration (email + password)
 - User login (email + password)
-- Token-based authentication (recommended: JWT or Laravel Sanctum)
+- Token-based authentication (recommended: Laravel Sanctum)
 
 ---
 
@@ -103,7 +101,7 @@ User can paste a list of card names.
 
 Flow:
 
-1. Parse input (split by line)
+1. Split input by line
 2. Normalize values
 3. Search each card via API
 4. Add matched cards to the deck
@@ -142,58 +140,88 @@ Filters:
 
 ---
 
-## 6. Backend Design (Laravel)
+## 6. Database Design (MySQL)
 
-### 6.1 Entities
+### 6.1 Rules
+
+- All schema must be managed via Laravel Migrations
+- All initial/test data must be managed via Laravel Seeders
+- No manual database changes allowed outside migrations
+
+---
+
+### 6.2 Entities
 
 #### Users
-
 - id
 - email
 - password
+- timestamps
 
 #### Decks
-
 - id
 - name
 - user_id
+- timestamps
 
 #### Deck_Cards
-
 - id
 - deck_id
 - card_id (external API id)
 - name
 - image
+- supertype (pokemon / trainer / energy)
+- types (json)
+- timestamps
 
 ---
 
-### 6.2 API Endpoints
+### 6.3 Migration Responsibilities
+
+The agent must:
+
+- Create migrations for all entities
+- Define relationships (foreign keys)
+- Use proper indexing (user_id, deck_id)
+
+---
+
+### 6.4 Seeder Responsibilities
+
+The agent must:
+
+- Create seeders for:
+  - Test users
+  - Sample decks
+  - Sample deck cards
+- Ensure seeders are idempotent when possible
+
+---
+
+## 7. Backend Design (Laravel)
+
+### 7.1 API Endpoints
 
 #### Auth
-
-POST /auth/register  
-POST /auth/login
+POST   /auth/register  
+POST   /auth/login  
 
 #### Decks
-
-GET /decks  
-POST /decks  
-GET /decks/{id}  
-DELETE /decks/{id}
+GET    /decks  
+POST   /decks  
+GET    /decks/{id}  
+DELETE /decks/{id}  
 
 #### Deck Cards
-
-POST /decks/{id}/cards  
-DELETE /decks/{id}/cards/{cardId}
+POST   /decks/{id}/cards  
+DELETE /decks/{id}/cards/{cardId}  
 
 #### Search
-
-GET /cards/search
+GET    /cards/search  
 
 ---
 
-### 6.3 Services
+### 7.2 Services
 
 - CardSearchService → integrates Pokémon API
 - DeckService → business logic
@@ -201,9 +229,9 @@ GET /cards/search
 
 ---
 
-## 7. Frontend Design (Next.js + MUI)
+## 8. Frontend Design (Next.js + MUI)
 
-### 7.1 Routing (App Router)
+### 8.1 Routing (App Router)
 
 - /login
 - /register
@@ -213,7 +241,7 @@ GET /cards/search
 
 ---
 
-### 7.2 UI Components (MUI)
+### 8.2 UI Components (MUI)
 
 Use Material UI components:
 
@@ -230,26 +258,23 @@ Use Material UI components:
 
 ---
 
-### 7.3 Pages
+### 8.3 Pages
 
 #### Auth
-
 - Login page
 - Register page
 
 #### Decks
-
 - Deck list
 - Deck detail
-- Create deck modal/page
+- Create deck
 
 #### Search
-
-- Search interface with filters
+- Card search interface
 
 ---
 
-### 7.4 Components
+### 8.4 Components
 
 - CardItem
 - CardList
@@ -260,27 +285,20 @@ Use Material UI components:
 
 ---
 
-### 7.5 State Management
+### 8.5 State Management
 
 - React hooks (useState, useEffect)
 - Optional: Context API
 
-Manage:
-
-- Auth state
-- Decks
-- Selected deck
-- Search results
-
 ---
 
-## 8. Clipboard Import Strategy
+## 9. Clipboard Import Strategy
 
 Input:
 
 Pikachu  
 Charizard  
-Lucario
+Lucario  
 
 Steps:
 
@@ -291,7 +309,7 @@ Steps:
 
 ---
 
-## 9. Filtering Logic
+## 10. Filtering Logic
 
 Filters must support:
 
@@ -307,7 +325,7 @@ Filters must support:
 
 ---
 
-## 10. External API Usage
+## 11. External API Usage
 
 Follow pokemon_api.md rules:
 
@@ -318,13 +336,15 @@ Follow pokemon_api.md rules:
 
 ---
 
-## 11. Best Practices
+## 12. Best Practices
 
 ### Backend
 
 - Use service layer
-- Validate requests
-- Cache API responses
+- Validate all inputs
+- Use migrations for ALL schema changes
+- Use seeders for initial data
+- Cache API responses when possible
 
 ### Frontend
 
@@ -334,26 +354,27 @@ Follow pokemon_api.md rules:
 
 ---
 
-## 12. Non-Goals (MVP)
+## 13. Non-Goals (MVP)
 
-- No deck validation rules
+- No advanced deck validation rules
 - No competitive meta analysis
 - No social features
 
 ---
 
-## 13. Agent Responsibilities
+## 14. Agent Responsibilities
 
 The agent must:
 
-- Implement backend and frontend features
+- Implement backend and frontend
+- Manage database via migrations and seeders
 - Integrate correctly with external API
 - Maintain clean and simple architecture
 - Avoid overengineering
 
 ---
 
-## 14. Future Enhancements
+## 15. Future Enhancements
 
 - Deck sharing
 - Collection tracking
