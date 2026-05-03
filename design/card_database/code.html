@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Card Database | PokéDex Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0F1115;
+            color: #e2e2e6;
+        }
+        .glass-panel {
+            background: rgba(26, 29, 35, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 30px -10px rgba(173, 198, 255, 0.2);
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#adc6ff",
+                    "surface-container-lowest": "#0c0e11",
+                    "inverse-surface": "#e2e2e6",
+                    "secondary-fixed-dim": "#4edea3",
+                    "on-secondary": "#003824",
+                    "on-primary-fixed-variant": "#004395",
+                    "on-secondary-container": "#00311f",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-container": "#df7412",
+                    "surface-variant": "#333538",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "error": "#ffb4ab",
+                    "on-primary-fixed": "#001a42",
+                    "on-tertiary-container": "#461f00",
+                    "surface-container-highest": "#333538",
+                    "surface-container": "#1e2023",
+                    "primary": "#adc6ff",
+                    "on-primary-container": "#00285d",
+                    "primary-fixed": "#d8e2ff",
+                    "surface-container-high": "#282a2d",
+                    "secondary-container": "#00a572",
+                    "on-surface": "#e2e2e6",
+                    "surface-dim": "#111316",
+                    "on-tertiary-fixed": "#311400",
+                    "surface": "#111316",
+                    "surface-bright": "#37393d",
+                    "on-primary": "#002e6a",
+                    "on-error": "#690005",
+                    "on-secondary-fixed": "#002113",
+                    "on-background": "#e2e2e6",
+                    "inverse-primary": "#005ac2",
+                    "outline-variant": "#424754",
+                    "outline": "#8c909f",
+                    "background": "#111316",
+                    "primary-container": "#4d8eff",
+                    "tertiary": "#ffb786",
+                    "secondary-fixed": "#6ffbbe",
+                    "surface-container-low": "#1a1c1f",
+                    "on-secondary-fixed-variant": "#005236",
+                    "tertiary-fixed": "#ffdcc6",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "secondary": "#4edea3",
+                    "surface-tint": "#adc6ff",
+                    "inverse-on-surface": "#2f3034",
+                    "on-surface-variant": "#c2c6d6",
+                    "on-tertiary": "#502400"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "gutter": "20px",
+                    "lg": "24px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "xl": "48px",
+                    "xs": "4px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "price-display": ["Space Grotesk"],
+                    "label-caps": ["Space Grotesk"],
+                    "h1": ["Space Grotesk"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "h2": ["Space Grotesk"],
+                    "display-lg": ["Space Grotesk"],
+                    "body-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "price-display": ["20px", {"lineHeight": "1", "fontWeight": "700"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h2": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "1.4", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-surface-dim text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar Shell -->
+<header class="bg-slate-900/80 backdrop-blur-xl docked full-width top-0 sticky z-50 border-b border-white/10 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.5)] flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-blue-500 dark:text-blue-400 font-['Space_Grotesk'] tracking-tight">Pokémon Pro</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-slate-400 font-['Space_Grotesk'] tracking-tight hover:text-blue-400 transition-colors duration-200" href="#">Dashboard</a>
+<a class="text-slate-400 font-['Space_Grotesk'] tracking-tight hover:text-blue-400 transition-colors duration-200" href="#">Collection</a>
+<a class="text-slate-400 font-['Space_Grotesk'] tracking-tight hover:text-blue-400 transition-colors duration-200" href="#">Deck Builder</a>
+<a class="text-blue-500 border-b-2 border-blue-500 font-['Space_Grotesk'] tracking-tight" href="#">Card Database</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="bg-slate-800 border-none rounded-lg pl-10 pr-4 py-2 text-sm w-64 focus:ring-1 focus:ring-blue-500 text-on-surface" placeholder="Search Pokémon, Set, or ID..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="text-slate-400 hover:text-blue-400 transition-colors duration-200 active:scale-95 transition-transform"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-slate-400 hover:text-blue-400 transition-colors duration-200 active:scale-95 transition-transform"><span class="material-symbols-outlined">account_circle</span></button>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar Shell (Desktop) -->
+<aside class="hidden lg:flex flex-col h-full py-8 bg-slate-900 h-screen w-64 border-r rounded-none border-r border-white/5 flat no shadows font-['Space_Grotesk'] text-sm font-medium">
+<div class="px-6 mb-8">
+<p class="text-slate-500 uppercase text-[10px] tracking-widest font-bold mb-4">Filters</p>
+<!-- Set Filter -->
+<div class="mb-6">
+<label class="text-slate-400 block mb-2 font-semibold">Set Selection</label>
+<select class="w-full bg-slate-800 border-white/10 rounded-lg text-xs py-2 px-3 text-on-surface focus:border-primary">
+<option>Paldean Fates</option>
+<option>Obsidian Flames</option>
+<option>151 Special Set</option>
+<option>Silver Tempest</option>
+</select>
+</div>
+<!-- Type Filter -->
+<div class="mb-6">
+<label class="text-slate-400 block mb-3 font-semibold">Energy Type</label>
+<div class="grid grid-cols-4 gap-2">
+<button class="w-8 h-8 rounded-full bg-red-600/20 border border-red-500/30 flex items-center justify-center text-xs hover:bg-red-600/40" title="Fire">F</button>
+<button class="w-8 h-8 rounded-full bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-xs hover:bg-blue-600/40" title="Water">W</button>
+<button class="w-8 h-8 rounded-full bg-green-600/20 border border-green-500/30 flex items-center justify-center text-xs hover:bg-green-600/40" title="Grass">G</button>
+<button class="w-8 h-8 rounded-full bg-yellow-500/20 border border-yellow-500/30 flex items-center justify-center text-xs hover:bg-yellow-500/40" title="Lightning">L</button>
+<button class="w-8 h-8 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-xs hover:bg-purple-600/40" title="Psychic">P</button>
+<button class="w-8 h-8 rounded-full bg-stone-600/20 border border-stone-500/30 flex items-center justify-center text-xs hover:bg-stone-600/40" title="Fighting">Fi</button>
+</div>
+</div>
+<!-- Rarity Filter -->
+<div class="mb-6">
+<label class="text-slate-400 block mb-2 font-semibold">Rarity</label>
+<div class="space-y-1">
+<label class="flex items-center gap-2 text-xs text-slate-300 py-1 hover:bg-white/5 px-2 rounded cursor-pointer">
+<input class="rounded border-white/20 bg-slate-800 text-blue-500" type="checkbox"/>
+                            Ultra Rare
+                        </label>
+<label class="flex items-center gap-2 text-xs text-slate-300 py-1 hover:bg-white/5 px-2 rounded cursor-pointer">
+<input class="rounded border-white/20 bg-slate-800 text-blue-500" type="checkbox"/>
+                            Illustration Rare
+                        </label>
+<label class="flex items-center gap-2 text-xs text-slate-300 py-1 hover:bg-white/5 px-2 rounded cursor-pointer">
+<input class="rounded border-white/20 bg-slate-800 text-blue-500" type="checkbox"/>
+                            Holofoil Rare
+                        </label>
+<label class="flex items-center gap-2 text-xs text-slate-300 py-1 hover:bg-white/5 px-2 rounded cursor-pointer">
+<input class="rounded border-white/20 bg-slate-800 text-blue-500" type="checkbox"/>
+                            Uncommon
+                        </label>
+</div>
+</div>
+<!-- Format Filter -->
+<div class="mb-6">
+<label class="text-slate-400 block mb-2 font-semibold">Tournament Format</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1 bg-slate-800 border border-blue-500/50 text-blue-400 rounded-full text-[10px]">Standard</button>
+<button class="px-3 py-1 bg-slate-800 border border-white/10 text-slate-400 rounded-full text-[10px]">Expanded</button>
+</div>
+</div>
+</div>
+<div class="mt-auto px-6 space-y-2">
+<button class="w-full bg-primary-container text-on-primary-container py-3 rounded-xl font-bold active:scale-95 transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">layers</span>
+                    Create New Deck
+                </button>
+<div class="pt-6 border-t border-white/5">
+<a class="flex items-center gap-3 py-2 text-slate-400 hover:text-blue-400 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+                        Settings
+                    </a>
+<a class="flex items-center gap-3 py-2 text-slate-400 hover:text-blue-400 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">help</span>
+                        Support
+                    </a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto bg-surface p-6 lg:p-8">
+<header class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="font-h1 text-h1 text-on-surface mb-2 tracking-tight">Card Database</h1>
+<p class="text-on-surface-variant font-body-md">Browsing 12,402 unique cards in the current Standard rotation.</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-sm text-slate-400">Sort by:</span>
+<button class="bg-surface-container-high px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2">
+                        Market Price: High to Low
+                        <span class="material-symbols-outlined text-xs">expand_more</span>
+</button>
+</div>
+</header>
+<!-- Card Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+<!-- Card Item 1 -->
+<div class="group relative bg-surface-container rounded-xl overflow-hidden card-hover-effect transition-all duration-300 border border-white/5">
+<div class="aspect-[3/4] relative overflow-hidden bg-slate-800">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A macro photography shot of a high-rarity holographic trading card showing a powerful draconic creature with shimmering blue scales. The lighting is focused on the texture of the foil, creating a rainbow prismatic effect that dances across the surface of the card against a dark, tech-oriented studio background. The overall aesthetic is professional, sleek, and focused on collectability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcwBTp7PIdM2FzZORppMQ5WIyKTeOGEjrKM1iqhk37684HeU1vB_joWedh6ET96ufEhNgdd2lEbwD0hX3YdT7rTP4brWA4nUNNMI9PJWb4snE7DPXA5RogTUMhUoNJJkmLw2cAwyBI635zqJ775EW1B_sXh9bZpIFO54Ve1R51BlKMGZzjQhjaCoJ_EX5isbVsbVH4-ElQKcUhABgmoE0UnC-SsyAWrvMet7KJ72kUXcvYJiScDaIy9LFY_aUerugq2kn4iTvxWzI"/>
+<div class="absolute top-3 right-3 bg-primary-container text-on-primary-container px-2 py-1 rounded text-[10px] font-bold tracking-widest uppercase">Ultra Rare</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-price-display text-base text-on-surface truncate">Charizard ex</h3>
+<span class="bg-secondary-container/20 text-secondary px-2 py-0.5 rounded-full text-[10px] font-bold border border-secondary/20">OWNED</span>
+</div>
+<p class="text-xs text-slate-500 mb-4">Obsidian Flames #223</p>
+<div class="flex items-end justify-between">
+<div>
+<p class="font-label-caps text-label-caps text-slate-400 mb-1">MARKET PRICE</p>
+<div class="flex items-center gap-2">
+<span class="font-price-display text-price-display text-secondary">$142.50</span>
+<span class="text-[10px] text-secondary flex items-center">
+<span class="material-symbols-outlined text-[12px]">north_east</span>
+                                        4.2%
+                                    </span>
+</div>
+</div>
+<button class="bg-slate-800 hover:bg-slate-700 w-10 h-10 rounded-lg flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-blue-400">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card Item 2 -->
+<div class="group relative bg-surface-container rounded-xl overflow-hidden card-hover-effect transition-all duration-300 border border-white/5">
+<div class="aspect-[3/4] relative overflow-hidden bg-slate-800">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A premium trading card featuring an electric mouse-like character emitting bright sparks of lightning. The card has a textured, full-art illustration with vibrant yellows and deep blacks. The lighting captures the intricate etching of the special illustration rare finish, emphasizing its luxury feel within a high-performance digital pokedex interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqOp9HuyP7C-35pSImbhSW7YkldYNovpPiIu3llTjmIg_JemCRie6QsA_zuh5_uPWh-9Pzn8o0sOViVlLuPaXzDVbZZ8sxxxxNVZBgB1rzPHYLN_nnb4p9qTYkqvYJNevKzNDlAmCu-gGptahnR0bkW1j2Z3yihTlRLiWJ1meGxwGZiUmLFGqZD-cq-uRlS6BaPJuETumNb2_pUK0X14lMd9Vmb9V_SN-Lhjmp4_Intj_WTDIgsEvr7oaMzUzbH_iT_7e9YD3NcIg"/>
+<div class="absolute top-3 right-3 bg-tertiary-container text-on-tertiary-container px-2 py-1 rounded text-[10px] font-bold tracking-widest uppercase">Illus. Rare</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-price-display text-base text-on-surface truncate">Pikachu ex</h3>
+<span class="bg-slate-800 text-slate-500 px-2 py-0.5 rounded-full text-[10px] font-bold border border-white/5">MISSING</span>
+</div>
+<p class="text-xs text-slate-500 mb-4">Paldean Fates #063</p>
+<div class="flex items-end justify-between">
+<div>
+<p class="font-label-caps text-label-caps text-slate-400 mb-1">MARKET PRICE</p>
+<div class="flex items-center gap-2">
+<span class="font-price-display text-price-display text-on-surface">$54.20</span>
+<span class="text-[10px] text-error flex items-center">
+<span class="material-symbols-outlined text-[12px]">south_east</span>
+                                        1.8%
+                                    </span>
+</div>
+</div>
+<button class="bg-primary text-on-primary w-10 h-10 rounded-lg flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card Item 3 -->
+<div class="group relative bg-surface-container rounded-xl overflow-hidden card-hover-effect transition-all duration-300 border border-white/5">
+<div class="aspect-[3/4] relative overflow-hidden bg-slate-800">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A high-quality trading card illustration of a majestic bird soaring through golden skies, executed in a modern digital painting style. The card's gold border gleams under simulated soft ambient lighting, highlighting its status as a rare collectible. The image is set against a deep charcoal background with subtle glassmorphic elements to match a professional TCG trading platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7SKX4t_J5sNK4gidbZbZgfhTv_wzGRBwgc2LckhUA_NBtqlN4Z3Ws4TbJuojlEXtLZqCGI9jO1RpUORhgt1c4KtmPLHVABGqwdmB2K9IaCBkW7XCqy2icwPPbMvnmWdJRxptb7qQ9HO2vpO-sfJ36BKCQp1KR52zTY-JCUVXw4Vtjbx_jnxDyVYVgAUngmo0efT5CSMYfPL9vUk18lsRmNQLdVKPcJVthXprzU_FuR6FRIr5LnrLPUo4m2H6RYcVMmNOV2HmgSGg"/>
+<div class="absolute top-3 right-3 bg-primary-container text-on-primary-container px-2 py-1 rounded text-[10px] font-bold tracking-widest uppercase">Secret Rare</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-price-display text-base text-on-surface truncate">Ho-Oh ex</h3>
+<span class="bg-secondary-container/20 text-secondary px-2 py-0.5 rounded-full text-[10px] font-bold border border-secondary/20">OWNED</span>
+</div>
+<p class="text-xs text-slate-500 mb-4">Paradox Rift #256</p>
+<div class="flex items-end justify-between">
+<div>
+<p class="font-label-caps text-label-caps text-slate-400 mb-1">MARKET PRICE</p>
+<div class="flex items-center gap-2">
+<span class="font-price-display text-price-display text-secondary">$89.15</span>
+<span class="text-[10px] text-secondary flex items-center">
+<span class="material-symbols-outlined text-[12px]">north_east</span>
+                                        12.4%
+                                    </span>
+</div>
+</div>
+<button class="bg-slate-800 hover:bg-slate-700 w-10 h-10 rounded-lg flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-blue-400">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card Item 4 -->
+<div class="group relative bg-surface-container rounded-xl overflow-hidden card-hover-effect transition-all duration-300 border border-white/5">
+<div class="aspect-[3/4] relative overflow-hidden bg-slate-800">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A close-up of a trading card featuring a water-type creature with fluid, artistic waves surrounding it. The card uses a cool blue and silver color palette, with holographic star patterns visible in the artwork. The scene is presented with a professional collectors perspective, emphasizing the crisp edges and pristine condition of the card surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdeWX_0GTKLUTj_tI0L0BvqyvK6KhSLQZJvyxFcYiO11-JejZo0iYozdH4Qw-ySpPz6-qH-madmbTFan_nJNvgkhW8x2Kp5sN7xlxsC2dLZuUW5RVc1J4yO4ze4QahKtjOz4q-wCPpsBpYMq1JvhcCixwFbXVSIvWWVh6asafiqbnwSAk10fN_DK4fiolujNdrVP1gXBgxK6it-D5c86-xohoT5mI8hyQLG-pk4cq06LNQnhQUlmiF5k1AnhX8o97n6PazxRgiQic"/>
+<div class="absolute top-3 right-3 bg-surface-variant text-on-surface-variant px-2 py-1 rounded text-[10px] font-bold tracking-widest uppercase">Holo Rare</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-price-display text-base text-on-surface truncate">Gyarados ex</h3>
+<span class="bg-slate-800 text-slate-500 px-2 py-0.5 rounded-full text-[10px] font-bold border border-white/5">MISSING</span>
+</div>
+<p class="text-xs text-slate-500 mb-4">Scarlet &amp; Violet #045</p>
+<div class="flex items-end justify-between">
+<div>
+<p class="font-label-caps text-label-caps text-slate-400 mb-1">MARKET PRICE</p>
+<div class="flex items-center gap-2">
+<span class="font-price-display text-price-display text-on-surface">$12.40</span>
+<span class="text-[10px] text-secondary flex items-center">
+<span class="material-symbols-outlined text-[12px]">north_east</span>
+                                        0.5%
+                                    </span>
+</div>
+</div>
+<button class="bg-primary text-on-primary w-10 h-10 rounded-lg flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card Item 5 -->
+<div class="group relative bg-surface-container rounded-xl overflow-hidden card-hover-effect transition-all duration-300 border border-white/5">
+<div class="aspect-[3/4] relative overflow-hidden bg-slate-800">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Digital illustration of a high-tech trading card featuring a psychic creature in a swirling cosmic void of purples and pinks. The card possesses a subtle textured finish with a faint prismatic sheen. The lighting is moody and dramatic, focused on the central character's glowing eyes, fitting perfectly with the dark charcoal and blue aesthetics of the pro-trainer interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWAYgzhTFI2xhDIzTyJ0aOhgb2DIXeA92Tu7pMw47_N8HCxbGww9wSAl8UQ8o-svuckbOi5DvEuH1eiF6iDRKtInOB5nvdogcFDvjm8wG__oBv6S3mFsww4XOjaP24kZoYZT4C3y1JdRj4OJuC4yjmtIjfrY8YunUQzMbf6FQbNQQSFuQsMDMfNFFxZWT4KJ_murBoU1KeaNSQuoIZD47osPc8koh_NNjJ4OCrF7rH1xUmnzHOXKtM0bYyNmy2vUWppKyfsdEpH2U"/>
+<div class="absolute top-3 right-3 bg-primary-container text-on-primary-container px-2 py-1 rounded text-[10px] font-bold tracking-widest uppercase">Ultra Rare</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-price-display text-base text-on-surface truncate">Mew ex</h3>
+<span class="bg-secondary-container/20 text-secondary px-2 py-0.5 rounded-full text-[10px] font-bold border border-secondary/20">OWNED</span>
+</div>
+<p class="text-xs text-slate-500 mb-4">151 Special Set #151</p>
+<div class="flex items-end justify-between">
+<div>
+<p class="font-label-caps text-label-caps text-slate-400 mb-1">MARKET PRICE</p>
+<div class="flex items-center gap-2">
+<span class="font-price-display text-price-display text-secondary">$32.00</span>
+<span class="text-[10px] text-secondary flex items-center">
+<span class="material-symbols-outlined text-[12px]">north_east</span>
+                                        2.1%
+                                    </span>
+</div>
+</div>
+<button class="bg-slate-800 hover:bg-slate-700 w-10 h-10 rounded-lg flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-blue-400">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Skeleton Loader Cards (Decorative) -->
+<div class="group relative bg-surface-container rounded-xl overflow-hidden opacity-40 border border-white/5">
+<div class="aspect-[3/4] bg-slate-800/50"></div>
+<div class="p-4 space-y-3">
+<div class="h-4 w-3/4 bg-slate-800 rounded"></div>
+<div class="h-3 w-1/2 bg-slate-800 rounded"></div>
+<div class="flex justify-between pt-2">
+<div class="h-6 w-20 bg-slate-800 rounded"></div>
+<div class="h-10 w-10 bg-slate-800 rounded"></div>
+</div>
+</div>
+</div>
+<div class="group relative bg-surface-container rounded-xl overflow-hidden opacity-40 border border-white/5">
+<div class="aspect-[3/4] bg-slate-800/50"></div>
+<div class="p-4 space-y-3">
+<div class="h-4 w-3/4 bg-slate-800 rounded"></div>
+<div class="h-3 w-1/2 bg-slate-800 rounded"></div>
+<div class="flex justify-between pt-2">
+<div class="h-6 w-20 bg-slate-800 rounded"></div>
+<div class="h-10 w-10 bg-slate-800 rounded"></div>
+</div>
+</div>
+</div>
+<div class="group relative bg-surface-container rounded-xl overflow-hidden opacity-40 border border-white/5">
+<div class="aspect-[3/4] bg-slate-800/50"></div>
+<div class="p-4 space-y-3">
+<div class="h-4 w-3/4 bg-slate-800 rounded"></div>
+<div class="h-3 w-1/2 bg-slate-800 rounded"></div>
+<div class="flex justify-between pt-2">
+<div class="h-6 w-20 bg-slate-800 rounded"></div>
+<div class="h-10 w-10 bg-slate-800 rounded"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- BottomNavBar Shell (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-slate-900 border-t border-white/10 flex justify-around items-center z-50">
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px]">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">style</span>
+<span class="text-[10px]">Cards</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-blue-500">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="text-[10px]">Search</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">layers</span>
+<span class="text-[10px]">Decks</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px]">Profile</span>
+</button>
+</nav>
+</body></html>

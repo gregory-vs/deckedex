@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #0F1115;
+            color: #e2e2e6;
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(26, 29, 35, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #333538;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#adc6ff",
+                    "surface-container-lowest": "#0c0e11",
+                    "inverse-surface": "#e2e2e6",
+                    "secondary-fixed-dim": "#4edea3",
+                    "on-secondary": "#003824",
+                    "on-primary-fixed-variant": "#004395",
+                    "on-secondary-container": "#00311f",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-container": "#df7412",
+                    "surface-variant": "#333538",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "error": "#ffb4ab",
+                    "on-primary-fixed": "#001a42",
+                    "on-tertiary-container": "#461f00",
+                    "surface-container-highest": "#333538",
+                    "error-container": "#93000a",
+                    "surface-container": "#1e2023",
+                    "primary": "#adc6ff",
+                    "on-primary-container": "#00285d",
+                    "primary-fixed": "#d8e2ff",
+                    "surface-container-high": "#282a2d",
+                    "secondary": "#4edea3",
+                    "on-surface": "#e2e2e6",
+                    "surface-dim": "#111316",
+                    "on-tertiary-fixed": "#311400",
+                    "surface": "#111316",
+                    "surface-bright": "#37393d",
+                    "on-primary": "#002e6a",
+                    "on-error": "#690005",
+                    "on-secondary-fixed": "#002113",
+                    "on-background": "#e2e2e6",
+                    "inverse-primary": "#005ac2",
+                    "outline-variant": "#424754",
+                    "outline": "#8c909f",
+                    "background": "#111316",
+                    "primary-container": "#4d8eff",
+                    "tertiary": "#ffb786",
+                    "secondary-fixed": "#6ffbbe",
+                    "surface-container-low": "#1a1c1f",
+                    "on-secondary-fixed-variant": "#005236",
+                    "tertiary-fixed": "#ffdcc6",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "surface-tint": "#adc6ff",
+                    "inverse-on-surface": "#2f3034",
+                    "on-surface-variant": "#c2c6d6",
+                    "on-tertiary": "#502400"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "price-display": ["Space Grotesk"],
+                    "label-caps": ["Space Grotesk"],
+                    "h1": ["Space Grotesk"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "h2": ["Space Grotesk"],
+                    "display-lg": ["Space Grotesk"],
+                    "body-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "price-display": ["20px", {"lineHeight": "1", "fontWeight": "700"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h2": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "1.4", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-slate-900/80 backdrop-blur-xl docked full-width top-0 sticky z-50 border-b border-white/10 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.5)] flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-8">
+<span class="font-['Space_Grotesk'] tracking-tighter text-xl font-bold text-blue-500 dark:text-blue-400">PokéDex Pro</span>
+<div class="hidden md:flex gap-6">
+<a class="font-['Space_Grotesk'] tracking-tight text-slate-400 hover:text-blue-400 transition-colors duration-200" href="#">Dashboard</a>
+<a class="font-['Space_Grotesk'] tracking-tight text-slate-400 hover:text-blue-400 transition-colors duration-200" href="#">Collection</a>
+<a class="font-['Space_Grotesk'] tracking-tight text-blue-500 border-b-2 border-blue-500" href="#">Deck Builder</a>
+<a class="font-['Space_Grotesk'] tracking-tight text-slate-400 hover:text-blue-400 transition-colors duration-200" href="#">Card Database</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="bg-surface-container-low border border-white/5 rounded-lg pl-10 pr-4 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 w-64" placeholder="Search cards..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-slate-400 hover:text-blue-400 active:scale-95 transition-all"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-2 text-slate-400 hover:text-blue-400 active:scale-95 transition-all"><span class="material-symbols-outlined">account_circle</span></button>
+</div>
+</div>
+</nav>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col h-[calc(100vh-64px)] w-64 border-r border-white/5 bg-slate-900 py-8 px-4 font-['Space_Grotesk'] text-sm font-medium">
+<div class="flex items-center gap-3 mb-8 px-2">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border border-primary/20">
+<img alt="Trainer" class="w-full h-full object-cover" data-alt="A highly detailed close-up portrait of a professional e-sports trainer wearing a sleek, futuristic headset. The lighting is dramatic and cinematic, with cool blue neon highlights against a deep charcoal background. The trainer has a focused, determined expression, embodying the competitive spirit of a master collector. The style is hyper-realistic and polished, matching a premium digital gaming platform aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5McWsQb-UTzjS3Yl9hCY-jjUhbnl5R8xNwOgh-e1b7x973Kb0Fo9lQKfVAAA_ipvGPrfi_9arjveOaW8lifvLAesI0ueBieMClbV-oJFG6PPM9CdtO90rwSTBIB8BBZ4PVVX3zMny1T8xDJWrSqNQL2161pZSUicDSi6m-E7Sw_Iyr-pjUTr3QyN5mLh6jFjCE-lmsHLVfH29qJaxSnqXg16g-YrIR-LTj2lB_-OifxZz9IRtEAJphXYqkH8QtmzqXzzqUFptOWw"/>
+</div>
+<div>
+<div class="text-on-background font-bold">Master Trainer</div>
+<div class="text-slate-500 text-xs uppercase tracking-widest">Elite Rank</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-lg group transition-all duration-200" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-lg group transition-all duration-200" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">style</span>
+                    Collection
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 bg-blue-500/10 text-blue-400 border-r-2 border-blue-500 rounded-none group" href="#">
+<span class="material-symbols-outlined">layers</span>
+                    Deck Builder
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-lg group transition-all duration-200" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">search</span>
+                    Card Database
+                </a>
+</nav>
+<button class="mt-4 mb-8 w-full py-3 bg-primary text-on-primary rounded-xl font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">add</span>
+                Create New Deck
+            </button>
+<div class="border-t border-white/5 pt-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-lg transition-all" href="#"><span class="material-symbols-outlined">settings</span> Settings</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-lg transition-all" href="#"><span class="material-symbols-outlined">help</span> Support</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex overflow-hidden">
+<!-- Left Panel: Card Search & Filters -->
+<section class="flex-1 flex flex-col p-6 overflow-hidden">
+<header class="mb-6">
+<h1 class="font-h1 text-h1 mb-2">Build Your Deck</h1>
+<p class="text-on-surface-variant font-body-md text-body-md">Search across 15,000+ cards to find the perfect synergy.</p>
+</header>
+<!-- Filter Bar -->
+<div class="flex flex-wrap gap-3 mb-6 bg-surface-container-low p-4 rounded-xl border border-white/5">
+<div class="flex-1 min-w-[200px]">
+<label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Search Name</label>
+<div class="relative">
+<input class="w-full bg-background border border-white/10 rounded-lg py-2 pl-3 pr-10 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none" placeholder="e.g. Charizard ex" type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">search</span>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Type</label>
+<select class="bg-background border border-white/10 rounded-lg py-2 px-3 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none min-w-[120px]">
+<option>All Types</option>
+<option>Fire</option>
+<option>Water</option>
+<option>Grass</option>
+<option>Electric</option>
+<option>Psychic</option>
+</select>
+</div>
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Set</label>
+<select class="bg-background border border-white/10 rounded-lg py-2 px-3 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none min-w-[140px]">
+<option>All Sets</option>
+<option>Paldean Fates</option>
+<option>Paradox Rift</option>
+<option>151 Special</option>
+</select>
+</div>
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Sort By</label>
+<select class="bg-background border border-white/10 rounded-lg py-2 px-3 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none">
+<option>Relevance</option>
+<option>Price (Low-High)</option>
+<option>HP (High-Low)</option>
+</select>
+</div>
+</div>
+<!-- Card Results Grid -->
+<div class="flex-1 overflow-y-auto custom-scrollbar pr-2">
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+<!-- Card Item 1 -->
+<div class="group relative bg-surface-container-low rounded-xl border border-white/5 p-2 hover:scale-[1.02] transition-all duration-300 cursor-pointer">
+<div class="aspect-[2.5/3.5] rounded-lg overflow-hidden bg-slate-800 mb-3 relative">
+<img alt="Card" class="w-full h-full object-cover" data-alt="A professional product shot of a high-end trading card featuring a vibrant red fiery dragon in a dynamic pose. The card has a holographic, textured finish that catches the light, set against a dark, minimalist charcoal surface. The lighting is bright and focused, highlighting the intricate details of the artwork and the metallic sheen of the card's borders. The overall aesthetic is premium, clean, and highly detailed, fitting for a competitive card collector platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0ojJgab58vglOv1JWaho29-SCYUU6psisewC1l3Hqbg6jj9EGh9dZHajguSSojKKSjFAiZ2MA-5NFzMQkpTFfa7qzvsTQdXYKneXYmTCIVLI-hq8BYwAUhfeTwwCHXn7rDGjHYLQge3zVV81jSkg3IlcoF5Ok-1PDumGQlMudyIuVjg_ERDK1nSuE6dtGx5aHTbwar44cUP1mS9CRpcqazCVZa48iUTEjjg6-wuao7_L4C5oJfvXeWNybtF0gabfRvOKqPo7j5kg"/>
+<div class="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+<button class="bg-blue-500 text-white rounded-full p-2 shadow-lg scale-75 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+<div class="px-1">
+<h3 class="text-body-sm font-bold truncate">Charizard ex</h3>
+<div class="flex justify-between items-center mt-1">
+<span class="text-[10px] text-slate-500 uppercase tracking-tighter">Obsidian Flames</span>
+<span class="text-blue-400 font-price-display text-sm">$84.50</span>
+</div>
+</div>
+</div>
+<!-- Card Item 2 -->
+<div class="group relative bg-surface-container-low rounded-xl border border-white/5 p-2 hover:scale-[1.02] transition-all duration-300 cursor-pointer">
+<div class="aspect-[2.5/3.5] rounded-lg overflow-hidden bg-slate-800 mb-3 relative">
+<img alt="Card" class="w-full h-full object-cover" data-alt="A close-up photograph of a trading card showcasing a powerful electric-type creature with glowing yellow energy surrounding it. The card's artwork is intense and colorful, with a premium matte finish that reduces glare. It's presented in a sophisticated digital interface with soft ambient lighting that emphasizes its collectible value. The environment is sleek and modern, using deep blacks and vibrant neon yellow accents to create a high-performance atmosphere for serious TCG players." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAabg9N7bwFVp0dZ6eF6M_G9CDnFAnC0m1JDUis_dTift6en4c4sxka5gr5jsl2V0W5JMQwqB24KeXXuUl-gDwltuxD9OiqR8JiRXKv1pyYtl-heUR1A1IG3DmlRMq-DB5RF0LDfR4I25lv4AMoadr2JPNl37xKBnvFzQpurNQDkwS6biyYtoZMYZIOfXSQMnlSmek7hGuD3frM0ZxTeKDse4oCzcs8CXDcV7XimOC6NnzrltFSXW6Nwpq_yRYxz5pMY6s0HYhzg2o"/>
+<div class="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+<button class="bg-blue-500 text-white rounded-full p-2 shadow-lg scale-75 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+<div class="px-1">
+<h3 class="text-body-sm font-bold truncate">Miraidon ex</h3>
+<div class="flex justify-between items-center mt-1">
+<span class="text-[10px] text-slate-500 uppercase tracking-tighter">Violet Base</span>
+<span class="text-blue-400 font-price-display text-sm">$12.20</span>
+</div>
+</div>
+</div>
+<!-- Repeat for more cards -->
+<div class="group relative bg-surface-container-low rounded-xl border border-white/5 p-2 hover:scale-[1.02] transition-all duration-300 cursor-pointer">
+<div class="aspect-[2.5/3.5] rounded-lg overflow-hidden bg-slate-800 mb-3 relative">
+<img alt="Card" class="w-full h-full object-cover" data-alt="Detailed studio shot of a rare trainer card from a popular TCG series, featuring dynamic character art with a sophisticated cool-toned color palette. The card rests on a dark reflective surface, with subtle lens flares creating a sense of rarity and high-end digital design. The background is a soft-focus charcoal environment, allowing the card's sharp lines and vibrant blues to stand out. This professional presentation targets high-level competitive players seeking premium digital tools." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqK0_5FVcdE6DJtLWeq9UYffKIXBA1EDG-Kzj0ndJcyUlMJdz3OOliOYI9hfp7O3Jx_MCwKsW4olR2vHIh_PGa1UNiVstYSCRAzKjpVHkQx0hX-awCRjxcaAWAt5nFSjYGNo9tHXfTlc2GSFnGr7o_MwbgnjjjUnocIaPU7hlI5Wg8UdmyLZFvaOyzvPgRR6ikKCXDOPrQzK2NtUrB8RKHMg2vbzmqFYRrYWauE3wBqiom62zUVuXvYJzOZkmOViU4b6JISkbk4sk"/>
+<div class="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+<button class="bg-blue-500 text-white rounded-full p-2 shadow-lg scale-75 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+<div class="px-1">
+<h3 class="text-body-sm font-bold truncate">Iono</h3>
+<div class="flex justify-between items-center mt-1">
+<span class="text-[10px] text-slate-500 uppercase tracking-tighter">Paldea Evolved</span>
+<span class="text-blue-400 font-price-display text-sm">$45.00</span>
+</div>
+</div>
+</div>
+<div class="group relative bg-surface-container-low rounded-xl border border-white/5 p-2 hover:scale-[1.02] transition-all duration-300 cursor-pointer">
+<div class="aspect-[2.5/3.5] rounded-lg overflow-hidden bg-slate-800 mb-3 relative">
+<img alt="Card" class="w-full h-full object-cover" data-alt="A vibrant digital illustration of a trading card featuring a psychic-type entity with swirling purple and pink cosmic energies. The card is displayed with a 1px metallic silver inner border that adds depth and professional polish. The background is a dark, immersive slate with a subtle bokeh effect. The overall lighting is soft and ambient, creating a luxurious, collector-focused atmosphere that emphasizes the card's intricate artwork and high value in a modern, glassmorphic UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-5dm_ES6GdGNtGx9Eb_aY_MUum-RCY5tKTizZy0TVKGVch_XQPA-NgrCmaZ0IqcXPoDZfKS9gJzp4un8udTv066jWpoAJUK7Ix5z-hOe8WupSWKeNR0C6owWU2r4lPEOr9kj19TljSli1XRPxpDS0h_-7cL8d2S9N5tv3g4O4dObD2KCsISwcGfhEvcc4pmRTJtB1En2ehPJpHRBXNwv_SDM1dYLZnEKqL8fPDKCqZWIL_dtz_7ARCZmiWQAxwKDpt9-S1OFbcrM"/>
+<div class="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+<button class="bg-blue-500 text-white rounded-full p-2 shadow-lg scale-75 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+<div class="px-1">
+<h3 class="text-body-sm font-bold truncate">Gardevoir ex</h3>
+<div class="flex justify-between items-center mt-1">
+<span class="text-[10px] text-slate-500 uppercase tracking-tighter">Scarlet &amp; Violet</span>
+<span class="text-blue-400 font-price-display text-sm">$18.75</span>
+</div>
+</div>
+</div>
+<div class="group relative bg-surface-container-low rounded-xl border border-white/5 p-2 hover:scale-[1.02] transition-all duration-300 cursor-pointer">
+<div class="aspect-[2.5/3.5] rounded-lg overflow-hidden bg-slate-800 mb-3 relative">
+<img alt="Card" class="w-full h-full object-cover" data-alt="A clean, high-resolution shot of a TCG card featuring a powerful water-type character amidst crashing waves. The artwork is bright and energetic, contrasting beautifully against the deep charcoal digital background of the interface. The card has a refined, polished look with perfectly crisp text and sharp graphical elements. The lighting is neutral and even, highlighting the card's playability and collection status for elite trainers using a sophisticated deck-building tool." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWnnp27B1_x8zojguhWi150WGP1-rvCibXgqAgSx62Mo-CTHsIF9qML6K4cYWJovwkuJZToQEVRq07B8LhlfOq6e0IxXrXw9NYAiNedZ14__8n8sE5_3DHbygU5cC529RJdKorUc8wvjGyOph32MqPKfY9OiLCsCwAsZRDlI5D01xmUwbfbqI0MdvoCPgXdRKDLqoyAwJ1pVmmr8BwwwAuQgZMHAe3MFqyem3L0l64SHmM0Bo1Ux74Q0tjIOF6gvj7x-Q0FZkCoWo"/>
+<div class="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+<button class="bg-blue-500 text-white rounded-full p-2 shadow-lg scale-75 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+<div class="px-1">
+<h3 class="text-body-sm font-bold truncate">Palkia VSTAR</h3>
+<div class="flex justify-between items-center mt-1">
+<span class="text-[10px] text-slate-500 uppercase tracking-tighter">Astral Radiance</span>
+<span class="text-blue-400 font-price-display text-sm">$6.40</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Panel: Current Deck List -->
+<section class="w-96 glass-panel flex flex-col border-l border-white/5">
+<div class="p-6 border-b border-white/5">
+<div class="flex justify-between items-center mb-4">
+<h2 class="font-h2 text-h2">Deck List</h2>
+<span class="bg-blue-500/20 text-blue-400 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest border border-blue-500/30">60 / 60</span>
+</div>
+<div class="relative group">
+<input class="w-full bg-transparent border-b border-white/10 py-1 text-lg font-bold focus:border-blue-500 outline-none" type="text" value="Charizard ex Turbo V2"/>
+<span class="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 text-slate-600 text-sm opacity-0 group-hover:opacity-100 transition-opacity">edit</span>
+</div>
+</div>
+<!-- Stats Summary -->
+<div class="px-6 py-4 grid grid-cols-3 gap-2 bg-slate-900/50">
+<div class="text-center p-2 rounded-lg bg-white/5">
+<div class="text-[10px] font-bold text-slate-500 uppercase">Pokémon</div>
+<div class="text-xl font-bold">14</div>
+</div>
+<div class="text-center p-2 rounded-lg bg-white/5">
+<div class="text-[10px] font-bold text-slate-500 uppercase">Trainer</div>
+<div class="text-xl font-bold">36</div>
+</div>
+<div class="text-center p-2 rounded-lg bg-white/5">
+<div class="text-[10px] font-bold text-slate-500 uppercase">Energy</div>
+<div class="text-xl font-bold">10</div>
+</div>
+</div>
+<!-- Deck Composition List -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-3">
+<!-- Deck Item 1 -->
+<div class="flex items-center gap-3 group bg-white/2 hover:bg-white/5 p-2 rounded-lg transition-all border border-transparent hover:border-white/5">
+<div class="w-12 h-16 rounded bg-slate-800 flex-shrink-0 overflow-hidden border border-white/10">
+<img alt="Card Thumb" class="w-full h-full object-cover" data-alt="A high-quality thumbnail of a trading card featuring a powerful fire-breathing dragon. The artwork is vibrant with deep reds and oranges, captured in sharp focus despite its small size. The thumbnail is framed within a professional UI element, using clean lines and a subtle inner glow. The style is modern and high-performance, reflecting a top-tier digital TCG environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEyvdGgbe17gOKg_z6rUxEBMq1VV71hr2IXijSbCKL4ikwApSyJzwrsrY58fILBcadkMH8EieEHCZuWgqUDT2J9D3ijXT5Of1ub63r0TMjoKS1DkFipVkgoYnqzKACWhzUSdcLNVyY7nozqjsx8Uhiqldu97rFZ-wMsd3e7ZBF5V6DKUYiBeFkJM9pBck2Qru-O68_9ITAx_v0fZLytGfwbE07KXeKGJ_inBaLpTRKJCmaCLLdfkwCeDlCI5B7BYmYDmHc2UQ3sj4"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-sm font-bold truncate">Charizard ex</div>
+<div class="text-[10px] text-slate-500 uppercase tracking-widest">Pokémon • Rare</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-6 h-6 rounded bg-surface-container-highest flex items-center justify-center text-slate-400 hover:text-white transition-colors"><span class="material-symbols-outlined text-sm">remove</span></button>
+<span class="w-4 text-center text-sm font-bold">3</span>
+<button class="w-6 h-6 rounded bg-blue-500 flex items-center justify-center text-white hover:bg-blue-400 transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+</div>
+<!-- Deck Item 2 -->
+<div class="flex items-center gap-3 group bg-white/2 hover:bg-white/5 p-2 rounded-lg transition-all border border-transparent hover:border-white/5">
+<div class="w-12 h-16 rounded bg-slate-800 flex-shrink-0 overflow-hidden border border-white/10">
+<img alt="Card Thumb" class="w-full h-full object-cover" data-alt="A small, detailed digital preview of a legendary electric-type trading card. The thumbnail highlights the card's glowing yellow accents and dynamic character art, even at a reduced scale. It is integrated seamlessly into a dark, sleek deck-building interface that emphasizes efficiency and professional competition. The overall look is premium and technical, designed for expert collectors and players." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0x4C4n8GOvaA7VU2l0Ci6KVeYbf5PAV3jM5Gr-gSRme47gzyhjS5PuefaQjA8Qq9I8pPaRC9OIBSCl8s1rCMaq6ME6NWr7_T0GPsLHV8xxX8Aqv7hBX-njFNA7q7_7ruydAdSP_uKetzS8fXhj_3mh8YiRz64wx_kSpEkrspwIdxzJeTB0m5yljU5SnmluAPEw_foyiPoIac4cRxXSkqDH8w8WKMaGMIrOPY6pJFaY3L8Izn51EF4zgs-tx6BYPVwbevMiZSfDKE"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-sm font-bold truncate">Battle VIP Pass</div>
+<div class="text-[10px] text-slate-500 uppercase tracking-widest">Trainer • Item</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-6 h-6 rounded bg-surface-container-highest flex items-center justify-center text-slate-400 hover:text-white transition-colors"><span class="material-symbols-outlined text-sm">remove</span></button>
+<span class="w-4 text-center text-sm font-bold">4</span>
+<button class="w-6 h-6 rounded bg-blue-500 flex items-center justify-center text-white hover:bg-blue-400 transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+</div>
+<!-- Deck Item 3 -->
+<div class="flex items-center gap-3 group bg-white/2 hover:bg-white/5 p-2 rounded-lg transition-all border border-transparent hover:border-white/5">
+<div class="w-12 h-16 rounded bg-slate-800 flex-shrink-0 overflow-hidden border border-white/10">
+<img alt="Card Thumb" class="w-full h-full object-cover" data-alt="A sharp, miniature representation of a high-value trainer card featuring a popular character in a dynamic pose. The cool-toned palette and sharp artwork are clearly visible, conveying a sense of quality and rarity. The thumbnail is positioned within a list-based UI component on a dark, professional platform, surrounded by subtle shadows and highlights that enhance the immersive digital experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZZHoJ-m67Hkh2J_tKklnwjMmZZLHU1KAA4S3yHAZCgn8_ZDzmw5ddxMqw5YnZMzChrn-CE63Ub3A2QhenP15XBW4LpHA5D7c2nHEb6tObVrICnojgMvD43kUdiGqNtrNROPXdY8iLBrwZjOi044dGklozCzmp8gcGqnxz8b077Oi_1DKAXPYeyd2JOYQiRHUy6kQSTHyuyCMFAVneZYYe0ztw8s3JXgJJwLrBMHFbaHDIOYuVY5Ni7L1jgh7SbhoPqKCDFwtopYM"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-sm font-bold truncate">Rare Candy</div>
+<div class="text-[10px] text-slate-500 uppercase tracking-widest">Trainer • Item</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-6 h-6 rounded bg-surface-container-highest flex items-center justify-center text-slate-400 hover:text-white transition-colors"><span class="material-symbols-outlined text-sm">remove</span></button>
+<span class="w-4 text-center text-sm font-bold">4</span>
+<button class="w-6 h-6 rounded bg-blue-500 flex items-center justify-center text-white hover:bg-blue-400 transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+</div>
+<!-- Deck Item 4 -->
+<div class="flex items-center gap-3 group bg-white/2 hover:bg-white/5 p-2 rounded-lg transition-all border border-transparent hover:border-white/5">
+<div class="w-12 h-16 rounded bg-slate-800 flex-shrink-0 overflow-hidden border border-white/10">
+<img alt="Card Thumb" class="w-full h-full object-cover" data-alt="A beautiful, high-resolution thumbnail of a psychic-themed TCG card with ethereal purple and magenta swirling patterns. The card's core artwork is centered and sharp, while its metallic edges give a hint of its premium collectible nature. It sits within a modern list item on a sleek charcoal background, reflecting a sophisticated and user-friendly deck-builder interface for serious competitive players." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdyTd_GZxEy4PUtQXa4Po5zMKGwzNv-ffePv627io8gb8EgzMr2r541TJvvP2YeAw-B6zjNILln7__prq_WrUbjLUO20zptmrc3LFe2sKfpRhQDxvcb7FGrZPdtFF7ZJaP0uiZGM-6wc6oQZ_vertl2suiHWY7CtatLH5CxMAOnAATSrSCQcGdNDDKlQoF_aTPNSAWpGbZ23p7urwt4JxHYh0jsO1sooalvOfSU47WAxGbhGAFinS7WH6RVY5h-8PcBMpt3APuGag"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-sm font-bold truncate">Iono</div>
+<div class="text-[10px] text-slate-500 uppercase tracking-widest">Trainer • Supporter</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-6 h-6 rounded bg-surface-container-highest flex items-center justify-center text-slate-400 hover:text-white transition-colors"><span class="material-symbols-outlined text-sm">remove</span></button>
+<span class="w-4 text-center text-sm font-bold">4</span>
+<button class="w-6 h-6 rounded bg-blue-500 flex items-center justify-center text-white hover:bg-blue-400 transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="p-6 bg-slate-900 border-t border-white/5">
+<div class="flex justify-between items-center mb-4">
+<span class="text-label-caps font-label-caps text-slate-500 uppercase">Est. Deck Value</span>
+<span class="font-price-display text-price-display text-blue-400">$342.15</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="py-3 border border-white/10 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-white/5 active:scale-95 transition-all text-sm">
+<span class="material-symbols-outlined text-lg">share</span>
+                            Export
+                        </button>
+<button class="py-3 bg-blue-500 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-blue-400 active:scale-95 transition-all text-sm shadow-[0_4px_15px_-5px_rgba(59,130,246,0.5)]">
+<span class="material-symbols-outlined text-lg">save</span>
+                            Save Deck
+                        </button>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Mobile Navigation (BottomNavBar) -->
+<nav class="md:hidden bg-slate-900/90 backdrop-blur-xl border-t border-white/5 h-16 w-full fixed bottom-0 left-0 flex justify-around items-center px-4 z-50">
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold uppercase">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">style</span>
+<span class="text-[10px] font-bold uppercase">Cards</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-blue-400">
+<span class="material-symbols-outlined">layers</span>
+<span class="text-[10px] font-bold uppercase">Deck</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="text-[10px] font-bold uppercase">Profile</span>
+</button>
+</nav>
+</body></html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed-dim": "#adc6ff",
+            "surface-container-lowest": "#0c0e11",
+            "inverse-surface": "#e2e2e6",
+            "secondary-fixed-dim": "#4edea3",
+            "on-secondary": "#003824",
+            "on-primary-fixed-variant": "#004395",
+            "on-secondary-container": "#00311f",
+            "on-error-container": "#ffdad6",
+            "tertiary-container": "#df7412",
+            "surface-variant": "#333538",
+            "tertiary-fixed-dim": "#ffb786",
+            "error": "#ffb4ab",
+            "on-primary-fixed": "#001a42",
+            "on-tertiary-container": "#461f00",
+            "surface-container-highest": "#333538",
+            "error-container": "#93000a",
+            "surface-container": "#1e2023",
+            "primary": "#adc6ff",
+            "on-primary-container": "#00285d",
+            "primary-fixed": "#d8e2ff",
+            "surface-container-high": "#282a2d",
+            "secondary": "#4edea3",
+            "on-surface": "#e2e2e6",
+            "surface-dim": "#111316",
+            "on-tertiary-fixed": "#311400",
+            "surface": "#111316",
+            "surface-bright": "#37393d",
+            "on-primary": "#002e6a",
+            "on-error": "#690005",
+            "on-secondary-fixed": "#002113",
+            "on-background": "#e2e2e6",
+            "inverse-primary": "#005ac2",
+            "outline-variant": "#424754",
+            "outline": "#8c909f",
+            "background": "#111316",
+            "primary-container": "#4d8eff",
+            "tertiary": "#ffb786",
+            "secondary-fixed": "#6ffbbe",
+            "surface-container-low": "#1a1c1f",
+            "on-secondary-fixed-variant": "#005236",
+            "tertiary-fixed": "#ffdcc6",
+            "on-tertiary-fixed-variant": "#723600",
+            "surface-tint": "#adc6ff",
+            "inverse-on-surface": "#2f3034",
+            "on-surface-variant": "#c2c6d6",
+            "on-tertiary": "#502400"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "unit": "4px",
+            "gutter": "20px",
+            "lg": "24px",
+            "md": "16px",
+            "sm": "8px",
+            "xl": "48px",
+            "xs": "4px",
+            "container-max": "1440px"
+          },
+          "fontFamily": {
+            "price-display": ["Space Grotesk"],
+            "label-caps": ["Space Grotesk"],
+            "h1": ["Space Grotesk"],
+            "body-lg": ["Inter"],
+            "body-md": ["Inter"],
+            "h2": ["Space Grotesk"],
+            "display-lg": ["Space Grotesk"],
+            "body-sm": ["Inter"]
+          },
+          "fontSize": {
+            "price-display": ["20px", {"lineHeight": "1", "fontWeight": "700"}],
+            "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+            "h1": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+            "h2": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+            "display-lg": ["48px", {"lineHeight": "1.1", "fontWeight": "700"}],
+            "body-sm": ["14px", {"lineHeight": "1.4", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .glass-surface {
+      background: rgba(26, 29, 35, 0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .accent-glow-blue {
+      box-shadow: 0 0 20px -5px rgba(173, 198, 255, 0.2);
+    }
+    .accent-glow-green {
+      box-shadow: 0 0 20px -5px rgba(78, 222, 163, 0.2);
+    }
+    body {
+      background-color: #0F1115;
+    }
+  </style>
+</head>
+<body class="text-on-surface font-body-md selection:bg-primary/30">
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col h-screen w-64 border-r border-white/5 bg-slate-900 sticky top-0">
+<div class="p-6 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary">capture</span>
+</div>
+<span class="font-h2 text-primary tracking-tighter">PokéDex Pro</span>
+</div>
+<div class="flex-1 px-4 py-8 space-y-2">
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-blue-500/10 text-blue-400 border-r-2 border-blue-500 rounded-none transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-caps uppercase">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="style">style</span>
+<span class="font-label-caps uppercase">Collection</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="layers">layers</span>
+<span class="font-label-caps uppercase">Deck Builder</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="search">search</span>
+<span class="font-label-caps uppercase">Card Database</span>
+</a>
+</nav>
+<div class="pt-8">
+<button class="w-full bg-primary text-on-primary font-label-caps py-3 rounded hover:opacity-90 active:scale-95 transition-all">
+            CREATE NEW DECK
+          </button>
+</div>
+</div>
+<div class="p-6 space-y-4 border-t border-white/5">
+<div class="flex items-center gap-3">
+<img alt="Trainer Profile" class="w-10 h-10 rounded-full border border-primary/20" data-alt="A professional close-up portrait of a young adult male trainer with a confident smile, wearing a sleek, futuristic high-collared jacket with blue neon piping. The background is a soft-focus high-tech laboratory environment with holographic interfaces. The lighting is dramatic and cool-toned, emphasizing the clean, modern aesthetic of the Elite Trainer interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6flUJaPsNNDm8jf7I6f8x8v7-rnGhe8moDQNQJCwswwQJ4UT-RX9Jz67CdownGx-ZWr1mRHb-HitJ9C98UjEx48QYlPRdYxRqUCC8lSLcnY2CSF2I9MxMaIVdS-1MkJj6DwOFJIpxWQbnvVRh8jI6yuPv9rs7lYgr9hmnpAzHwovqS0pK0siNMi-3mOmEQtPm716bAcfXSKULH1Jo1SZDiVMA3ojO97ThGm5NQkAFTfUxwfGbGbQU3jGQy2cK9_Zesh5Q_5QsmO8"/>
+<div>
+<p class="font-label-caps text-on-surface">Master Trainer</p>
+<p class="text-xs text-slate-500">Elite Rank</p>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="settings">settings</span>
+<span class="font-label-caps text-[10px] uppercase">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="help">help</span>
+<span class="font-label-caps text-[10px] uppercase">Support</span>
+</a>
+</nav>
+</div>
+</aside>
+<main class="flex-1 min-w-0 bg-background overflow-y-auto">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-xl border-b border-white/10 flex justify-between items-center px-6 h-16 w-full shadow-[0_4px_20px_-10px_rgba(0,0,0,0.5)]">
+<div class="flex items-center gap-4 lg:hidden">
+<span class="material-symbols-outlined text-primary">menu</span>
+<span class="font-['Space_Grotesk'] text-xl font-bold tracking-tighter text-blue-500">PokéDex Pro</span>
+</div>
+<div class="hidden md:flex items-center flex-1 max-w-xl mx-8">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-1 focus:ring-primary placeholder:text-slate-600" placeholder="Search collection, sets, or market prices..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-400 hover:text-blue-400 transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-400 hover:text-blue-400 transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<div class="max-w-[1440px] mx-auto p-6 md:p-10 space-y-10">
+<!-- Hero Stats Bento -->
+<section class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<div class="glass-surface md:col-span-2 p-8 rounded-xl flex flex-col justify-between accent-glow-blue overflow-hidden relative">
+<div class="absolute -right-10 -bottom-10 opacity-5">
+<span class="material-symbols-outlined text-[200px]" style="font-variation-settings: 'wght' 700;">payments</span>
+</div>
+<div>
+<p class="font-label-caps text-slate-400 mb-2">TOTAL ESTIMATED MARKET VALUE</p>
+<h1 class="font-display-lg text-primary">$42,850.32</h1>
+<div class="flex items-center gap-2 mt-2 text-secondary">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="font-price-display text-sm">+12.4% this month</span>
+</div>
+</div>
+<div class="mt-8 flex gap-4">
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-caps text-xs">VIEW PORTFOLIO</button>
+<button class="border border-outline-variant px-6 py-2 rounded-lg font-label-caps text-xs hover:bg-white/5">ANALYTICS</button>
+</div>
+</div>
+<div class="glass-surface p-8 rounded-xl flex flex-col items-center justify-center text-center relative">
+<div class="relative w-32 h-32 mb-4">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-secondary" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-dasharray="364.4" stroke-dashoffset="109.3" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-display-lg text-2xl">72%</span>
+<span class="font-label-caps text-[8px] text-slate-500">COMPLETE</span>
+</div>
+</div>
+<p class="font-label-caps text-slate-400">COLLECTION PROGRESS</p>
+<p class="text-xs text-slate-500 mt-1">2,841 / 3,945 Cards</p>
+</div>
+<div class="glass-surface p-8 rounded-xl flex flex-col justify-between">
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-label-caps text-slate-400">RARE PULLS</span>
+<span class="text-primary font-price-display">42</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary w-2/3 h-full"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-caps text-slate-400">PSA 10S</span>
+<span class="text-primary font-price-display">15</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary w-1/4 h-full"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-caps text-slate-400">WISH LIST</span>
+<span class="text-primary font-price-display">128</span>
+</div>
+</div>
+<button class="w-full mt-6 text-xs text-primary font-label-caps hover:underline">VIEW ALL STATS</button>
+</div>
+</section>
+<!-- Set Progress Grid -->
+<section class="space-y-6">
+<div class="flex justify-between items-end">
+<div>
+<p class="font-label-caps text-primary">COMPLETION BY EXPANSION</p>
+<h2 class="font-h2">Set Progress Overview</h2>
+</div>
+<button class="text-slate-400 hover:text-white flex items-center gap-2">
+<span class="font-label-caps text-xs">VIEW ALL SETS</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Set Card 1 -->
+<div class="glass-surface p-5 rounded-xl hover:bg-surface-container-high transition-colors group cursor-pointer">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center p-2">
+<img alt="Crown Zenith Logo" data-alt="A sharp, minimalist icon represention of a Pokémon TCG expansion symbol, specifically Crown Zenith, rendered in high-contrast metallic gold on a dark charcoal background. The lighting is focused and cinematic, creating a premium feel consistent with a professional collector's dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfNeNbCY5lomwgCcrCGn5b8hktCI5AshQre5ar9Yf6mJ-wDeZIQAZlJYlaT_e5D20II_KX_l2Oi1wmwsw-g8Dks1zzwGi2wijxr1W8YGfasbQQ40QPftYtubUs-YMunzqvYKnbk3pg4MfOiU7A7wxsD3TUK35BFH1o6f-IemYv372gOSfv5WLBqnVgKl-Ch_avcPGZahUhewoxMTMBbuAvRPSQSQyFA6TFw0dvqUlvpnSy8ikS-hEuwMaXdi2cvkXiWFC-h6HVmw8"/>
+</div>
+<div class="min-w-0">
+<h3 class="font-label-caps text-sm truncate">Crown Zenith</h3>
+<p class="text-xs text-slate-500">Sword &amp; Shield</p>
+</div>
+</div>
+<div class="flex justify-between text-xs font-label-caps mb-2">
+<span class="text-slate-400">Progress</span>
+<span class="text-secondary">94%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary w-[94%] h-full"></div>
+</div>
+</div>
+<!-- Set Card 2 -->
+<div class="glass-surface p-5 rounded-xl hover:bg-surface-container-high transition-colors group cursor-pointer">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center p-2">
+<img alt="Evolving Skies Logo" data-alt="A stylized, glowing icon of the Evolving Skies Pokémon TCG expansion set logo, featuring vibrant teal and deep purple neon elements against a dark textured background. The aesthetic is clean and modern, following the professional trading platform visual language of the application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpMjhjpIkItjNEG9nsiOzZrdbFGxIVO8P6MB2UAk3YZ2znB2l5-ljYMTHJkPkrXt21xfP3aOWRIjSUhXzyR4LffeyK28pks7f0NrSU1HhCCYSr5keStOdwQrFO37H9ZGP3gog4l7FInyR4_CsUXreNGniuZFdWaxmhxIixC7djwPAJG6YcjZx83fiid-cAr1VoPkKV0I3kHkUEU_L-a3ltQ8dCZToSjMeJaNbfUUQ4z4QBD_dcz4E-JsNUNFSiDuLsnmuKAxYfm2k"/>
+</div>
+<div class="min-w-0">
+<h3 class="font-label-caps text-sm truncate">Evolving Skies</h3>
+<p class="text-xs text-slate-500">Sword &amp; Shield</p>
+</div>
+</div>
+<div class="flex justify-between text-xs font-label-caps mb-2">
+<span class="text-slate-400">Progress</span>
+<span class="text-secondary">42%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary w-[42%] h-full"></div>
+</div>
+</div>
+<!-- Set Card 3 -->
+<div class="glass-surface p-5 rounded-xl hover:bg-surface-container-high transition-colors group cursor-pointer">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center p-2">
+<img alt="151 Logo" data-alt="A commemorative 151 Pokémon TCG expansion logo, designed with a nostalgic but premium aesthetic, using clean sans-serif typography and a red and white color scheme. The lighting is bright and even, highlighting the clean lines and professional finish of the digital interface component." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4e_JL027q2qzn6y8NVexQJliLFFzh-8TUFq8bgAPO8ul4ZCWrpGMgefPgVNn3O1bFH-uM_5sMQivONW7vHypxfWmsIbKjw0HRCa6zxn1LHziX76fBu29e7_kX9t8b1M7D7D1ZFUzHAXFCbG--RR_G6X3BRcJurg1P4WU_V-jlE8tvNla2LWKiNy4nfIHzOThJEPIfdgR0dnx9kaaMJe1WxhwyApNwkxiVfob8xe_vRDsJdZ6uLg1l99w8Ui9Nd58uAw_tFGwRYhM"/>
+</div>
+<div class="min-w-0">
+<h3 class="font-label-caps text-sm truncate">Scarlet &amp; Violet 151</h3>
+<p class="text-xs text-slate-500">Scarlet &amp; Violet</p>
+</div>
+</div>
+<div class="flex justify-between text-xs font-label-caps mb-2">
+<span class="text-slate-400">Progress</span>
+<span class="text-secondary">100%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary w-full h-full"></div>
+</div>
+</div>
+<!-- Set Card 4 -->
+<div class="glass-surface p-5 rounded-xl hover:bg-surface-container-high transition-colors group cursor-pointer">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center p-2">
+<img alt="Paldea Evolved Logo" data-alt="A modern Pokémon TCG set symbol for Paldea Evolved, featuring sharp geometric shapes in lime green and charcoal grey. The image is crisp and digital, set against a dark glassmorphic background with subtle depth and lighting reflections that fit the Elite Trainer interface style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD08Mn6umCys4Z6a360qr31qHDyUDxrjZdZJ0TsUExDmj0eJaVNq2zfspjcsMx2kgZnu8Z-gVV_aWvbVWbgchOHTy7O9FMqVIax72ewJEzKRgfG6YQ7CEB4AC0jimqJu-GBt_MYBWI3rjBrxwjEWoEOqBa9fMXOlSYnuzZ1YyJgSItRoKH_MrAo1_iLRuMYZk-eL2Y2AHYYCu-W9sBTWHOGilMHYMyrs3MoFZH5XHfvAroxQqNfiVYs2DDH0E69txblR1RhRvI2hR4"/>
+</div>
+<div class="min-w-0">
+<h3 class="font-label-caps text-sm truncate">Paldea Evolved</h3>
+<p class="text-xs text-slate-500">Scarlet &amp; Violet</p>
+</div>
+</div>
+<div class="flex justify-between text-xs font-label-caps mb-2">
+<span class="text-slate-400">Progress</span>
+<span class="text-secondary">12%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary w-[12%] h-full"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Additions -->
+<section class="space-y-6">
+<div class="flex justify-between items-end">
+<div>
+<p class="font-label-caps text-primary">RECENT ACQUISITIONS</p>
+<h2 class="font-h2">New Additions to Gallery</h2>
+</div>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+<!-- Card 1 -->
+<div class="group relative">
+<div class="aspect-[2/3] rounded-xl overflow-hidden glass-surface p-1 transition-transform group-hover:scale-[1.02] group-hover:accent-glow-blue cursor-pointer">
+<img alt="Umbreon VMAX" class="w-full h-full object-cover rounded-lg" data-alt="A stunning, high-detail photograph of a holographic Umbreon VMAX Pokémon card from the Evolving Skies set. The card features intricate textured patterns and vibrant purples and blues that shimmer under professional studio lighting. The background is a dark, clean slate that emphasizes the premium rarity and physical quality of the collectible card." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApAtOhhxl4fc9xsSfgpLQoem3R_Y_8Yz99ssFtYIJPEiNGpnmq7e-zT00Hys3Wae_oXdcR3nE0HDh6wH9aiQ3iuctp91vuIkWg68T-AFS-JFlXztimG4GKyrusE4brtvLKHXNGvE92qj6_MQthAmkp4id-9sTAbhlcHsX95Bzoh7A8kmqGqbqZ4N24zC3oFGXp0dBKQK-fLKl0L8wLPxYWwVMrTch2bQTKHiRvoTcdVqU8ML42mSbCSA4HkN6twfTjNo0rwW0Ne5E"/>
+</div>
+<div class="mt-4 space-y-1">
+<div class="flex justify-between items-start">
+<h4 class="font-label-caps text-sm truncate">Umbreon VMAX</h4>
+<span class="bg-secondary/10 text-secondary px-2 py-0.5 rounded text-[10px] font-bold">PSA 10</span>
+</div>
+<p class="text-xs text-slate-500">Evolving Skies #215</p>
+<div class="flex justify-between items-center pt-2">
+<span class="font-price-display text-primary">$842.00</span>
+<div class="flex items-center text-xs font-label-caps text-secondary">
+<span class="material-symbols-outlined text-xs">check_circle</span>
+<span class="ml-1">OWNED</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative">
+<div class="aspect-[2/3] rounded-xl overflow-hidden glass-surface p-1 transition-transform group-hover:scale-[1.02] group-hover:accent-glow-blue cursor-pointer">
+<img alt="Rayquaza V" class="w-full h-full object-cover rounded-lg" data-alt="An extreme close-up of a Full Art Rayquaza V Pokémon card, showcasing the high-definition line work and emerald green holographic foil. The lighting captures the rainbow reflections from the card's surface, set against a dark charcoal background. The composition is clean and focused, reflecting a high-end digital collector's experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgukAMp1Ep7Qrgr_2VdxJNHWqXyWPoThFmrxzdpg4VqNNe07KY8_XL22eb1UOKtIhZTGDaiqf4MEnCJEfuWIL8ypCIkhfQ9Kw4JVQBPVzjejDB7-eCq-MIea8C9DOx2XpKAFHAAIu9s3T5C1H7Ipcl2ectAx5_F6BJrb6IA5UTam1pTLZczc8H4cg1J2KW4QKeCXJCbws4XjEjBedgm1woXZAcBOK6dO_2b9TK-OBnDEPPPANR28N2hwDhIZ9mHJQxdoPTaf4fr2k"/>
+</div>
+<div class="mt-4 space-y-1">
+<div class="flex justify-between items-start">
+<h4 class="font-label-caps text-sm truncate">Rayquaza V</h4>
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px] font-bold">NM</span>
+</div>
+<p class="text-xs text-slate-500">Evolving Skies #194</p>
+<div class="flex justify-between items-center pt-2">
+<span class="font-price-display text-primary">$124.50</span>
+<div class="flex items-center text-xs font-label-caps text-secondary">
+<span class="material-symbols-outlined text-xs">check_circle</span>
+<span class="ml-1">OWNED</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative">
+<div class="aspect-[2/3] rounded-xl overflow-hidden glass-surface p-1 transition-transform group-hover:scale-[1.02] group-hover:accent-glow-blue cursor-pointer">
+<img alt="Charizard ex" class="w-full h-full object-cover rounded-lg" data-alt="A cinematic capture of a Charizard ex Special Illustration Rare Pokémon card, with fiery orange and deep red hues glowing with a textured holographic finish. The card is presented in a minimalist, modern frame that fits the dark-mode aesthetic of the Pokédex Pro. Soft side-lighting highlights the physical texture of the card." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsvd0WF7xQYQs7XoY9qXrw47xGFtXlsNyhKGoxXCSFIxs-rPta1KF-_BAxepNy3spvXe_6bwEvo85oCgsRVn2g1FxnbCkcGMujeLsIkvqWXlbg29ndvTrQQuUjxa2VRVVHBv1DRDNOIhRFT7Y8HzmjSzvoQhlZPV1h3YPvw5cDGJDCCEe1JMH_WV4dXrMMGGt9mtq__Y1qRTYmg3qoybkoNYjGAydOHqxKndQSV8VmetwicDG46Bo4B00PcK0vEOy04aVTRMzAHeQ"/>
+</div>
+<div class="mt-4 space-y-1">
+<div class="flex justify-between items-start">
+<h4 class="font-label-caps text-sm truncate">Charizard ex</h4>
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px] font-bold">PSA 9</span>
+</div>
+<p class="text-xs text-slate-500">151 Expansion #199</p>
+<div class="flex justify-between items-center pt-2">
+<span class="font-price-display text-primary">$185.00</span>
+<div class="flex items-center text-xs font-label-caps text-secondary">
+<span class="material-symbols-outlined text-xs">check_circle</span>
+<span class="ml-1">OWNED</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group relative">
+<div class="aspect-[2/3] rounded-xl overflow-hidden glass-surface p-1 transition-transform group-hover:scale-[1.02] group-hover:accent-glow-blue cursor-pointer">
+<img alt="Giratina V" class="w-full h-full object-cover rounded-lg" data-alt="The Alternate Art Giratina V Pokémon card from Lost Origin, known for its complex and surreal artwork. The image emphasizes the card's depth and the vibrant gold and black details that pop against a dark, minimalist backdrop. The lighting is diffused to ensure all artistic details are visible while maintaining a moody, premium tone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_iMPQAevrI_Zgh8uRlpACvUEDu8i_FX1puwRO1s8FzN4vxopCga4mv8i5QZpOUkIXJipd9qoNsjRV1cW-gCuTLIjwdf3U2RJNTZ7WYwjym6hlU_uUIxRy5QFPLA28feRRjnbrqB6sHBheaSgJXBBR-UkJ43zHF_Lw4Ki_WyTPtZCwh2fNYrtSnzuVz8aQuDM_ZROHJNAlSe8mri7xgRIWokpxL73n7-Gln52doAFM4tyE48QWMmzagT3g-1TFczhprH8mRX_iNiQ"/>
+</div>
+<div class="mt-4 space-y-1">
+<div class="flex justify-between items-start">
+<h4 class="font-label-caps text-sm truncate">Giratina V</h4>
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px] font-bold">NM</span>
+</div>
+<p class="text-xs text-slate-500">Lost Origin #186</p>
+<div class="flex justify-between items-center pt-2">
+<span class="font-price-display text-primary">$412.30</span>
+<div class="flex items-center text-xs font-label-caps text-secondary">
+<span class="material-symbols-outlined text-xs">check_circle</span>
+<span class="ml-1">OWNED</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group relative">
+<div class="aspect-[2/3] rounded-xl overflow-hidden glass-surface p-1 transition-transform group-hover:scale-[1.02] group-hover:accent-glow-blue cursor-pointer">
+<img alt="Lugia V Alternate Art Placeholder" class="w-full h-full object-cover rounded-lg opacity-40 grayscale" data-alt="A placeholder graphic for a missing Pokémon TCG card, designed with a sleek digital ghost-style aesthetic. It uses a muted grey palette and a semi-transparent slate border with a 1px glow. The background is a dark charcoal with subtle tech-inspired patterns, maintaining the professional and immersive atmosphere of the collector's dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKAY02D-JNW46zdnQnNv3tF5p2rnVmBndwrEtOfzbdm_CMhos8boeDyUBaZt9WwYlEKPHUfrHSZv0NB7lx8eLIpSjYfVZ1VmF5tK0Uo5DMNOEBXPUDkBUR5T-qDrXsQyaXbPJZYDODQSLk5-CyFljtP2EIWySQYji7YV_tvpybHqWMYS4RUyHd-3m2mnHXTwmR05vDwhU_83yXpeW34otthqMV_0ngaHnrAGxE8YDVExmxK664MStuk7t-FIksKuE8gaUi67FHxxA"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-500 text-4xl">add_circle</span>
+</div>
+</div>
+<div class="mt-4 space-y-1">
+<div class="flex justify-between items-start">
+<h4 class="font-label-caps text-sm truncate text-slate-500">Lugia V (Alt Art)</h4>
+</div>
+<p class="text-xs text-slate-500">Silver Tempest #186</p>
+<div class="flex justify-between items-center pt-2">
+<span class="font-price-display text-slate-500">$215.00</span>
+<div class="flex items-center text-xs font-label-caps text-slate-500">
+<span class="material-symbols-outlined text-xs">radio_button_unchecked</span>
+<span class="ml-1">MISSING</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Mobile BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-slate-900 border-t border-white/10 flex justify-around items-center px-4 z-50">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-label-caps">DASHBOARD</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined" data-icon="style">style</span>
+<span class="text-[10px] font-label-caps">COLLECTION</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+<span class="text-[10px] font-label-caps">DECKS</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="text-[10px] font-label-caps">SEARCH</span>
+</a>
+</nav>
+</main>
+</div>
+</body></html>
